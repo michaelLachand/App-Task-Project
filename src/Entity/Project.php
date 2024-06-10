@@ -6,6 +6,7 @@ use App\Repository\ProjectRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ProjectRepository::class)]
 class Project
@@ -16,9 +17,11 @@ class Project
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
     private ?string $name = null;
 
     #[ORM\Column(length: 5)]
+    #[Assert\Length(min: 2,max: 5)]
     private ?string $keyCode = null;
 
     #[ORM\ManyToOne(inversedBy: 'leadedProjects')]
